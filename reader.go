@@ -37,27 +37,13 @@ func (r *Reader) Skip(n int) (err error) {
 	return
 }
 
-// PeekBits read the int of n bits.
-// Returns -1 if there is insufficient data or invalid bits number.
-func (r *Reader) PeekBits(n int) (ret int) {
+// Peek peek the int of n bits.
+func (r *Reader) Peek(n int) (u64 uint64, err error) {
 	offset := r.offset
-	ret = r.ReadBits(n)
-	r.offset = offset
-	return ret
-}
-
-// ReadBits read the int of n bits.
-// Returns -1 if there is insufficient data or invalid bits number.
-func (r *Reader) ReadBits(n int) (ret int) {
-	if n < 0 || n > 63 {
-		return -1
-	}
-
-	u64, err := r.readBits(n)
-	if err != nil {
-		return -1
-	}
-	return int(u64)
+	defer func() {
+		r.offset = offset
+	}()
+	return r.ReadUint64(n)
 }
 
 // ReadBit read a bit.
