@@ -57,6 +57,17 @@ func (r *Reader) ReadBit() (ret uint8, err error) {
 	return
 }
 
+// ReadInt read the int of n bits.
+func (r *Reader) ReadInt(n int) (ret int, err error) {
+	if n < 0 || n > 32 {
+		return 0, errInvalidBitsNumber
+	}
+	var u64 uint64
+	u64, err = r.readBits(n)
+	ret = int(u64)
+	return
+}
+
 // ReadUint8 read the uint8 of n bits.
 func (r *Reader) ReadUint8(n int) (u8 uint8, err error) {
 	if n < 0 || n > 8 {
