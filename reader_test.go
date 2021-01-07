@@ -126,7 +126,6 @@ func BenchmarkReadUint8(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		r.offset = 2
-		r.byteOffset = 0
 		ret, _ := r.ReadUint8(7)
 		_ = ret
 	}
@@ -160,7 +159,6 @@ func BenchmarkReadUint64(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		r.offset = 2
-		r.byteOffset = 0
 		ret, _ := r.ReadUint64(61)
 		_ = ret
 	}
