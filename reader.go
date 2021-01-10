@@ -119,8 +119,8 @@ func (r *Reader) BitsLeft() int {
 	return len(r.buf)<<3 - r.offset
 }
 
-// Bytes returns the left byte slice.
-func (r *Reader) Bytes() []byte {
+// BytesLeft returns the left byte slice.
+func (r *Reader) BytesLeft() []byte {
 	return r.buf[r.offset>>3:]
 }
 
